@@ -4,7 +4,7 @@ import com.kodilla.ecommercee.domain.dto.ProductDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -12,38 +12,30 @@ import java.util.List;
 public class ProductController {
 
     @GetMapping("/{id}")
-    public ProductDto getProduct(@PathVariable Long id) {
-        // Zwracanie sztucznych danych dla konkretnego produktu o podanym ID
-        return new ProductDto(id, "Product " + id, "Description of product " + id, new BigDecimal("9.99"), 1L);
+    public ProductDto getProductById(@PathVariable Long id) {
+        // implementacja zwracająca sztuczne dane
+        return new ProductDto(id, "Nazwa produktu", "Opis produktu", BigDecimal.valueOf(9.99), 1L);
     }
 
-    @GetMapping
-    public List<ProductDto> getProducts() {
-        // Zwracanie sztucznych danych dla listy produktów
-        List<ProductDto> products = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            products.add(new ProductDto((long) i, "Product " + i, "Description of product " + i, new BigDecimal("9.99"), 1L));
-        }
-        return products;
+    @GetMapping("/group/{groupId}")
+    public List<ProductDto> getProductsByGroupId(@PathVariable Long groupId) {
+        // implementacja zwracająca sztuczne dane
+        return Arrays.asList(
+                new ProductDto(1L, "Nazwa produktu 1", "Opis produktu 1", BigDecimal.valueOf(9.99), groupId),
+                new ProductDto(2L, "Nazwa produktu 2", "Opis produktu 2", BigDecimal.valueOf(19.99), groupId),
+                new ProductDto(3L, "Nazwa produktu 3", "Opis produktu 3", BigDecimal.valueOf(29.99), groupId)
+        );
     }
 
     @PostMapping
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
-        // Implementacja dodawania produktu do bazy danych
-        // Zwracanie stworzonego produktu
+        // implementacja tworzenia produktu
         return productDto;
     }
 
-    @PutMapping("/{id}")
-    public ProductDto updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
-        // Implementacja aktualizacji produktu w bazie danych
-        // Zwracanie zaktualizowanego produktu
-        return productDto;
-    }
 
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
-        // Implementacja usuwania produktu z bazy danych
+        // implementacja usuwania produktu
     }
-
 }

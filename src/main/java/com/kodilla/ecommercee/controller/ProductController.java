@@ -1,41 +1,37 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.domain.GenericEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("v1/shop/products")
 public class ProductController {
 
-    @GetMapping("/{id}")
-    public ProductDto getProductById(@PathVariable Long id) {
-        // implementacja zwracająca sztuczne dane
-        return new ProductDto(id, "Nazwa produktu", "Opis produktu", BigDecimal.valueOf(9.99), 1L);
+
+    @GetMapping
+    public GenericEntity getProducts() {
+        return new GenericEntity("Test - get(GET) all products");
     }
 
-    @GetMapping("/group/{groupId}")
-    public List<ProductDto> getProductsByGroupId(@PathVariable Long groupId) {
-        // implementacja zwracająca sztuczne dane
-        return Arrays.asList(
-                new ProductDto(1L, "Nazwa produktu 1", "Opis produktu 1", BigDecimal.valueOf(9.99), groupId),
-                new ProductDto(2L, "Nazwa produktu 2", "Opis produktu 2", BigDecimal.valueOf(19.99), groupId),
-                new ProductDto(3L, "Nazwa produktu 3", "Opis produktu 3", BigDecimal.valueOf(29.99), groupId)
-        );
+    @GetMapping(value = "{productId}")
+    public GenericEntity getProduct(@PathVariable Long productId) {
+        return new GenericEntity("Test - get(GET) single product with id: " + productId);
+    }
+
+    @PutMapping
+    public GenericEntity updateProduct() {
+        return new GenericEntity("Test - update(PUT) product");
     }
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
-        // implementacja tworzenia produktu
-        return productDto;
+    public GenericEntity createProduct() {
+        return new GenericEntity("Test - create(POST) product");
     }
 
-
-    @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        // implementacja usuwania produktu
+    @DeleteMapping
+    public GenericEntity deleteProduct() {
+        return new GenericEntity("Test - delete(DELETE) product");
     }
+
 }

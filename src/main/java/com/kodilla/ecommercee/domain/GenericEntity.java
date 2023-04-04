@@ -1,4 +1,7 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domain;
+
+import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

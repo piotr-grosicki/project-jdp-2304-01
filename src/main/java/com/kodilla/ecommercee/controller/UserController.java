@@ -11,7 +11,7 @@ public class UserController {
     public UserDto createUser(@RequestBody UserDto userDto) {
         return new UserDto(userDto.getId(), "Test - create(POST) user", "Test - lastName", true, 1L);
     }
-    @PutMapping(value = "{userId}")
+    @PutMapping(value = "block/{userId}")
     public UserDto updateUserStatus(@PathVariable long userId) {
         return new UserDto(userId,"Test - update(PUT) user", "Test - lastName", false, 1L);
     }

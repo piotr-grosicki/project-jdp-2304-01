@@ -27,8 +27,8 @@ public class ProductController {
         return new ProductDto(3,4,"Product_A","Test - create(POST) product",10);
     }
 
-    @DeleteMapping
-    public ProductDto deleteProduct() {
+    @DeleteMapping(value = "{productId}")
+    public ProductDto deleteProduct(@RequestBody ProductDto productDto) {
         return new ProductDto(1,2,"Product","Test - delete(DELETE) product",10);
     }
 }

@@ -30,9 +30,9 @@ public class CartController {
         return new GenericEntity("(POST) Cart created");
     }
 
-    @PutMapping("/{id}")
-    public GenericEntity updateCart(@PathVariable long id, @RequestBody CartDto cartDto) {
-        return new GenericEntity("(PUT) Cart with id " + id + " edited");
+    @PutMapping
+    public GenericEntity updateCart(@RequestBody CartDto cartDto) {
+        return new GenericEntity("(PUT) Cart edited");
     }
 
     @DeleteMapping("/{id}")

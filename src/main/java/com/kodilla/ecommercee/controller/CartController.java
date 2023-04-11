@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.CartDto;
+import com.kodilla.ecommercee.domain.dto.CartDto;
 import com.kodilla.ecommercee.domain.GenericEntity;
 import org.springframework.web.bind.annotation.*;
 

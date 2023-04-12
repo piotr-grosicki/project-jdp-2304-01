@@ -20,9 +20,6 @@ public class Product {
     @Column(name = "ID", unique = true)
     private Long id;
 
-    @Column(name = "PRODUCT_ID")
-    private Long productId;
-
     @Column(name = "NAME")
     private String name;
 

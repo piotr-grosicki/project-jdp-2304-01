@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.dto.Product;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +26,8 @@ public class ProductGroup {
     @OneToMany(
             targetEntity = Product.class,
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            mappedBy = "productGroup"
     )
     private List<Product> products = new ArrayList<>();
 

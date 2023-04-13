@@ -32,7 +32,7 @@ public class User {
     @Column(name = "activationKey")
     private String activationKey = generateActivationKey();
 
-    @OneToMany(
+    /*@OneToMany(
             targetEntity = Cart.class,
             mappedBy = "user",
             cascade = {
@@ -40,7 +40,7 @@ public class User {
                     CascadeType.REMOVE
             }
     )
-    private Set<Cart> carts;
+    private Set<Cart> carts;*/
 
     @OneToMany(
             targetEntity = OrderDetails.class,
@@ -58,7 +58,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
-        this.carts = new HashSet<>();
+        //this.carts = new HashSet<>();
         this.orders = new HashSet<>();
         this.activationKey = generateActivationKey();
     }
@@ -69,11 +69,9 @@ public class User {
         this.lastName = lastName;
         this.status = status;
         this.activationKey = generateActivationKey();
-        this.carts = carts;
+        //this.carts = carts;
         this.orders = orders;
     }
 
-    public void addCart(Cart cart) {
-        carts.add(cart);
-    }
+
 }

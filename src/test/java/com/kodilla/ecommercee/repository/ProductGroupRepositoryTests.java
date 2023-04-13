@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.repository;
 
+import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.ProductGroup;
-import com.kodilla.ecommercee.domain.dto.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +86,9 @@ public class ProductGroupRepositoryTests {
         productGroup.getProducts().add(product1);
         productGroup.getProducts().add(product2);
 
+        product1.setProductGroup(productGroup);
+        product2.setProductGroup(productGroup);
+
         //When
         productGroupRepository.save(productGroup);
         Optional<Product> foundEntity = productRepository.findById(product2.getId());
@@ -106,6 +109,10 @@ public class ProductGroupRepositoryTests {
         Product product2 = new Product();
         productGroup.getProducts().add(product1);
         productGroup.getProducts().add(product2);
+
+        product1.setProductGroup(productGroup);
+        product2.setProductGroup(productGroup);
+
         productGroupRepository.save(productGroup);
 
         //When

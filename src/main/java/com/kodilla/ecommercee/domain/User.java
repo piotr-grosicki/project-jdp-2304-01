@@ -27,7 +27,7 @@ public class User {
     @Column(name = "STATUS", nullable = false)
     private boolean status;
 
-    @GeneratedValue
+
     @Column(name = "activationKey")
     private long activationKey;
 

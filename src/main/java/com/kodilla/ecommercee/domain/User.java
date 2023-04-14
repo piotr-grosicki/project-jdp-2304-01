@@ -1,11 +1,10 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @NoArgsConstructor
@@ -30,48 +29,23 @@ public class User {
 
     @GeneratedValue
     @Column(name = "activationKey")
-    private String activationKey = generateActivationKey();
+    private long activationKey;
 
-    /*@OneToMany(
-            targetEntity = Cart.class,
-            mappedBy = "user",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.REMOVE
-            }
-    )
-    private Set<Cart> carts;*/
 
     @OneToMany(
             targetEntity = OrderDetails.class,
             mappedBy = "user",
             cascade = CascadeType.ALL
     )
-    private Set<OrderDetails> orders;
+    private List<OrderDetails> orders;
 
-    private String generateActivationKey(){
-        Random random = new Random();
-        return Integer.toString(random.nextInt(99999999));
-    }
 
-    public User(String firstName, String lastName, boolean status) {
+    public User(String firstName, String lastName, boolean status, long activationKey) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
-        //this.carts = new HashSet<>();
-        this.orders = new HashSet<>();
-        this.activationKey = generateActivationKey();
+        this.orders = new ArrayList<>();
+        this.activationKey = activationKey;
     }
-
-    public User(Long id, String firstName, String lastName, boolean status, String activationKey, Set<Cart> carts, Set<OrderDetails> orders) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
-        this.activationKey = generateActivationKey();
-        //this.carts = carts;
-        this.orders = orders;
-    }
-
 
 }

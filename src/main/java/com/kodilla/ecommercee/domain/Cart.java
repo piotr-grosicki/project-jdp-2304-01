@@ -24,14 +24,14 @@ public class Cart {
     private Long id;
 
     @OneToOne(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @ManyToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY
     )
     private List<Product> productList = new ArrayList<>();

@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +27,9 @@ public class OrderDetailsRepositoryTests {
 
     @Autowired
     private CartGroupRepository cartGroupRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Test
     public void testSaveOrderDetails() {
@@ -48,6 +53,35 @@ public class OrderDetailsRepositoryTests {
         orderDetailsRepository.deleteAll();
     }
 
+    @Test
+    public void testDownloadElementsFromCart() {
+        //Given
+        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        Product product1 = new Product();
+        Product product2 = new Product();
+        List<Product> productList = new ArrayList<>();
+        productList.add(product1);
+        productList.add(product2);
+        Cart cart = new Cart(user, productList);
+        OrderDetails orderDetails = new OrderDetails(BigDecimal.ONE,cart, user);
+
+        //When
+        userRepository.save(user);
+        productRepository.save(product1);
+        productRepository.save(product2);
+        cartGroupRepository.save(cart);
+        orderDetailsRepository.save(orderDetails);
+
+        //Then
+        assertEquals(2,orderDetailsRepository.findById(orderDetails.getId()).get().getCart().getProductList().size());
+
+        //Clean up
+        userRepository.deleteAll();
+        productRepository.save(product1);
+        productRepository.save(product2);
+        cartGroupRepository.deleteAll();
+        orderDetailsRepository.deleteAll();
+    }
 
     @Test
     public void testDeleteOrderDetails() {

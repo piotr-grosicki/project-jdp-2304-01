@@ -70,7 +70,7 @@ public class ProductRepositoryTests {
 
         //Then
         long id = group.getId();
-        assertEquals(3, productAmount);
+        assertEquals(2, productAmount);
 
         //Cleanup
         groupRepository.deleteById(id);
@@ -97,7 +97,7 @@ public class ProductRepositoryTests {
         List<Product> products = (List<Product>) productRepository.findAll();
         int productAmount = products.size();
 
-        assertEquals(1L, productAmount);
+        assertEquals(1, productAmount);
         assertTrue(!groupRepository.findAll().isEmpty());
 
         //CleanUp

@@ -121,8 +121,13 @@ public class CartGroupRepositoryTestSuite {
 
         //Then
         assertEquals(2, cart.getProductList().size());
+
         productList.add(new Product());
+        Cart updatedCart = cartGroupRepository.save(cart);
+
+        assertEquals(cart.getId(), updatedCart.getId());
         assertEquals(3, cart.getProductList().size());
+        assertEquals(3, updatedCart.getProductList().size());
 
         //CleanUp
         cartGroupRepository.deleteAll();
@@ -150,10 +155,15 @@ public class CartGroupRepositoryTestSuite {
         //Then
         assertEquals(2, cart.getProductList().size());
         assertTrue(cart.getProductList().contains(product1));
-        productList.remove(product1);
+
+        cart.getProductList().remove(product1);
+        Cart updatedCart = cartGroupRepository.save(cart);
+
+        assertEquals(cart.getId(), updatedCart.getId());
         assertFalse(cart.getProductList().contains(product1));
         assertTrue(cart.getProductList().contains(product2));
         assertEquals(1, cart.getProductList().size());
+        assertEquals(1, updatedCart.getProductList().size());
 
         //CleanUp
         cartGroupRepository.deleteAll();

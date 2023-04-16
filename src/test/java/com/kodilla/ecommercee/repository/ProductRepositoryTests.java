@@ -9,8 +9,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,32 +53,31 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void testFindAllProducts(){
-
-        //Given
+    public void testFindAllProducts() {
+        // Given
         ProductGroup group = new ProductGroup("NAME");
-        Product product1 = new Product(1L, "Name", "Descr", 10.5, group,new ArrayList<>());
+        Product product1 = new Product(1L, "Name", "Descr", 10.5, group, new ArrayList<>());
         Product product2 = new Product(2L, "Name2", "Descr2", 11.5, group, new ArrayList<>());
         Product product3 = new Product(3L, "Name3", "Descr3", 12.5, group, new ArrayList<>());
 
-        //When
+        // When
         groupRepository.save(group);
-        productRepository.save(product1);
-        productRepository.save(product2);
-        productRepository.save(product3);
+        List<Product> productList = Arrays.asList(product1, product2, product3);
+        productRepository.saveAll(productList);
         List<Product> products = (List<Product>) productRepository.findAll();
         int productAmount = products.size();
 
-        //Then
-        long id = group.getId();
+        // Then
+        long groupId = group.getId();
         assertEquals(3, productAmount);
 
-        //Cleanup
-        groupRepository.deleteById(id);
-
+        // CleanUp
+        productRepository.deleteAll(productList);
+        groupRepository.deleteById(groupId);
     }
 
     @Test
+    @Transactional
     public void testDeleteProduct_ShouldSaveGroup(){
 
         //Given

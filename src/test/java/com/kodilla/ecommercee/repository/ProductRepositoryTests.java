@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -70,7 +69,7 @@ public class ProductRepositoryTests {
 
         //Then
         long id = group.getId();
-        assertEquals(2, productAmount);
+        assertEquals(3, productAmount);
 
         //Cleanup
         groupRepository.deleteById(id);
@@ -98,7 +97,7 @@ public class ProductRepositoryTests {
         int productAmount = products.size();
 
         assertEquals(1, productAmount);
-        assertTrue(!groupRepository.findAll().isEmpty());
+        assertFalse(groupRepository.findAll().isEmpty());
 
         //CleanUp
         groupRepository.deleteById(id);

@@ -78,30 +78,23 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void testDeleteProduct_ShouldSaveGroup(){
-
-        //Given
-        ProductGroup group = new ProductGroup("NAME");
-        Product product1 = new Product(1L,"Name", "Descr", 5.50, group, new ArrayList<>());
-        Product product2 = new Product(2L, "Name2", "Descr2", 7.50, group, new ArrayList<>());
-
-        //When
+    public void testDeleteProduct_ShouldSaveGroup() {
+        // Given
+        ProductGroup group = new ProductGroup(null, "Group");
+        Product product = new Product(null, "Product", "Description", 10.0, group, new ArrayList<>());
         groupRepository.save(group);
-        productRepository.save(product1);
-        productRepository.save(product2);
-        long product1Id = productRepository.save(product1).getId();
+        productRepository.save(product);
 
-        //Then
-        long id = group.getId();
-        productRepository.deleteById(product1Id);
-        List<Product> products = (List<Product>) productRepository.findAll();
-        int productAmount = products.size();
+        // When
+        productRepository.deleteById(product.getId());
 
-        assertEquals(1, productAmount);
-        assertFalse(groupRepository.findAll().isEmpty());
+        // Then
+        assertFalse(productRepository.findById(product.getId()).isPresent());
+        assertTrue(groupRepository.findById(group.getId()).isPresent());
+
 
         //CleanUp
-        groupRepository.deleteById(id);
+        groupRepository.deleteById(group.getId());
     }
 
 }

@@ -26,7 +26,7 @@ public class OrderDetailsRepositoryTests {
     private UserRepository userRepository;
 
     @Autowired
-    private CartGroupRepository cartGroupRepository;
+    private CartRepository cartGroupRepository;
 
     @Autowired
     private ProductRepository productRepository;

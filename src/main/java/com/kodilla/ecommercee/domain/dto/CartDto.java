@@ -8,20 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CartDto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String value;
+    private Long userId;
+    private List<ProductDto> products = new ArrayList<>();
 
-    public CartDto() {
-    }
-
-    public CartDto(String value) {
-        this.value = value;
+    public CartDto(Long id, Long userId) {
+        this.id = id;
+        this.userId = userId;
     }
 }

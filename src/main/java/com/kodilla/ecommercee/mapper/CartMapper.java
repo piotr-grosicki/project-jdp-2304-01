@@ -14,13 +14,6 @@ public class CartMapper {
 
     private final ProductMapper productMapper;
 
-    public CartDto mapNewCartDto(Cart cart) {
-        return new CartDto(
-                cart.getId(),
-                cart.getUser().getId()
-        );
-    }
-
     public CartDto mapToCartDto(Cart cart) {
         return new CartDto(
                 cart.getId(),

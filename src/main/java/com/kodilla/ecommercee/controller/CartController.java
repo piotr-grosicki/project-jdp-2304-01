@@ -29,7 +29,7 @@ public class CartController {
 
     @PostMapping("createCart/forUser/{userId}")
     public ResponseEntity<CartDto> createCart(@PathVariable Long userId) throws UserNotFoundException {
-        return ResponseEntity.ok(mapper.mapNewCartDto(service.createCart(userId)));
+        return ResponseEntity.ok(mapper.mapToCartDto(service.createCart(userId)));
     }
 
     @PutMapping("addToCart/{cartId}/product/{productId}")

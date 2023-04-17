@@ -77,7 +77,6 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    @Transactional
     public void testDeleteProduct_ShouldSaveGroup(){
 
         //Given

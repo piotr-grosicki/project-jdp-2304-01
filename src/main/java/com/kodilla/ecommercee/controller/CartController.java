@@ -1,42 +1,52 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exceptions.CartNotFoundException;
+import com.kodilla.ecommercee.controller.exceptions.ProductNotFoundException;
+import com.kodilla.ecommercee.controller.exceptions.UserNotFoundException;
+import com.kodilla.ecommercee.domain.OrderDetails;
 import com.kodilla.ecommercee.domain.dto.CartDto;
-import com.kodilla.ecommercee.domain.GenericEntity;
+import com.kodilla.ecommercee.domain.dto.OrderDetailsDto;
+import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.mapper.OrderDetailsMapper;
+import com.kodilla.ecommercee.service.CartDbService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("v1/shop/carts")
+@RequiredArgsConstructor
 public class CartController {
 
-    @GetMapping
-    public List<GenericEntity> getCarts() {
-        List<GenericEntity> carts = new ArrayList<>();
-        carts.add(new GenericEntity("Cart 1"));
-        carts.add(new GenericEntity("Cart 2"));
-        carts.add(new GenericEntity("Cart 3"));
-        return carts;
+    private final CartDbService service;
+    private final CartMapper mapper;
+    private final OrderDetailsMapper orderDetailsMapper;
+
+    @GetMapping("{cartId}")
+    public ResponseEntity<CartDto> getCart(@PathVariable long cartId) throws CartNotFoundException{
+        return ResponseEntity.ok(mapper.mapToCartDto(service.getCart(cartId)));
     }
 
-    @GetMapping("/{id}")
-    public GenericEntity getCart(@PathVariable long id) {
-        return new GenericEntity("(GET) Cart " + id);
+    @PostMapping("createCart/forUser/{userId}")
+    public ResponseEntity<CartDto> createCart(@PathVariable Long userId) throws UserNotFoundException {
+        return ResponseEntity.ok(mapper.mapNewCartDto(service.createCart(userId)));
     }
 
-    @PostMapping
-    public GenericEntity createCart(@RequestBody CartDto cartDto) {
-        return new GenericEntity("(POST) Cart created");
+    @PutMapping("addToCart/{cartId}/product/{productId}")
+    public ResponseEntity<CartDto> updateCart(@PathVariable Long cartId,
+                                              @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
+        return ResponseEntity.ok(mapper.mapToCartDto(service.addToCart(cartId, productId)));
     }
 
-    @PutMapping
-    public GenericEntity updateCart(@RequestBody CartDto cartDto) {
-        return new GenericEntity("(PUT) Cart edited");
+    @PutMapping("createOrder/{cartId}")
+    public ResponseEntity<OrderDetailsDto> createOrder(@PathVariable Long cartId) throws CartNotFoundException {
+        OrderDetails orderDetails = service.createOrder(cartId);
+        return ResponseEntity.ok(orderDetailsMapper.mapToOrderDetailsDto(orderDetails));
     }
 
-    @DeleteMapping("/{id}")
-    public GenericEntity deleteCart(@PathVariable long id) {
-        return new GenericEntity("(DELETE) Cart with id " + id +" removed");
+    @DeleteMapping("removeFromCart/{cartId}/product/{productId}")
+    public ResponseEntity<CartDto> deleteCart(@PathVariable Long cartId,
+                                              @PathVariable Long productId) throws CartNotFoundException, ProductNotFoundException {
+        return ResponseEntity.ok(mapper.mapToCartDto(service.deleteFromCart(cartId, productId)));
     }
 }

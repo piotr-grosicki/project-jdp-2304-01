@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class CartGroupRepositoryTestSuite {
 
     @Autowired
-    private CartGroupRepository cartGroupRepository;
+    private CartRepository cartGroupRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired

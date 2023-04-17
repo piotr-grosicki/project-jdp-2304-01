@@ -36,9 +36,9 @@ public class Cart {
     )
     private List<Product> productList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "cart")
-    @JoinColumn(name = "ORDER_ID")
-    private OrderDetails orderDetails;
+    public Cart(User user) {
+        this.user = user;
+    }
 
     public Cart(User user, List<Product> productList) {
         this.user = user;

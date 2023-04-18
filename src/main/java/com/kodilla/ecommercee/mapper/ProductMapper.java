@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductMapper {
 
-    public ProductDto mapToProductDto(Product product) {
+    public ProductDto mapToProductDto(final Product product) {
         return new ProductDto(
                 product.getId(),
                 product.getName(),
@@ -19,7 +19,18 @@ public class ProductMapper {
         );
     }
 
-    public List<ProductDto> mapToProductDtoList(List<Product> products) {
-        return products.stream().map(this::mapToProductDto).collect(Collectors.toList());
+    public List<ProductDto> mapToProductDtoList(final List<Product> products) {
+        return products.stream()
+                .map(this::mapToProductDto)
+                .collect(Collectors.toList());
+    }
+
+    public Product mapToProduct(final ProductDto productDto) {
+        return new Product(
+                productDto.getId(),
+                productDto.getName(),
+                productDto.getDescription(),
+                productDto.getPrice()
+        );
     }
 }

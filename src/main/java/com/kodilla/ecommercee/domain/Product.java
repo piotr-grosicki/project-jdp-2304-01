@@ -43,19 +43,20 @@ public class Product {
             name = "JOIN_PRODUCT_CART",
             joinColumns = {
                     @JoinColumn(
-                    name = "PRODUCT_ID",
-                    referencedColumnName = "ID")},
+                            name = "PRODUCT_ID",
+                            referencedColumnName = "ID")},
             inverseJoinColumns = {
                     @JoinColumn(
-                    name = "CART_ID",
-                    referencedColumnName = "ID")}
+                            name = "CART_ID",
+                            referencedColumnName = "ID")}
     )
     private List<Cart> cartList = new ArrayList<>();
 
-    public Product(Long id, String name, String description, Double price) {
+    public Product(Long id, String name, String description, Double price, ProductGroup productGroup) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.productGroup = productGroup;
     }
 }

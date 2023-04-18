@@ -65,7 +65,7 @@ public class ProductRepositoryTests {
         groupRepository.save(group);
         List<Product> productList = Arrays.asList(product1, product2, product3);
         productRepository.saveAll(productList);
-        List<Product> products = (List<Product>) productRepository.findAll();
+        List<Product> products = productRepository.findAll();
         int productAmount = products.size();
 
         // Then

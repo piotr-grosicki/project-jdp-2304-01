@@ -3,20 +3,20 @@ package com.kodilla.ecommercee.mapper;
 import com.kodilla.ecommercee.controller.exceptions.ProductGroupNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
+import com.kodilla.ecommercee.domain.dto.ProductGroupDto;
+import com.kodilla.ecommercee.repository.ProductGroupRepository;
 import com.kodilla.ecommercee.service.ProductDbService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProductMapper {
 
-    private ProductDbService productDbService;
-
-    public ProductMapper(ProductDbService productDbService) {
-        this.productDbService = productDbService;
-    }
+    private final ProductGroupRepository groupRepository;
 
     public ProductDto mapToProductDto(final Product product) {
         return new ProductDto(
@@ -40,7 +40,7 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
-                productDbService.getGroup(productDto.getGroupId())
+                groupRepository.findById(productDto.getGroupId()).orElseThrow(ProductGroupNotFoundException::new)
         );
     }
 }

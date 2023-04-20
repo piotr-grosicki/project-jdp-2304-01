@@ -10,13 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductDbService {
 
     private final ProductRepository productRepository;
-    private final ProductGroupRepository groupRepository;
 
     public List<Product> getProductList() {
         return productRepository.findAll();
@@ -31,13 +31,7 @@ public class ProductDbService {
     }
 
     public void deleteProductById(final Long productId) throws ProductNotFoundException {
-        if (!productRepository.existsById(productId)){
-            throw new ProductNotFoundException();
-        }
-        productRepository.deleteById(productId);
-    }
-
-    public ProductGroup getGroup(Long groupId) throws ProductGroupNotFoundException {
-        return groupRepository.findById(groupId).orElseThrow(ProductGroupNotFoundException::new);
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFoundException::new);
+        productRepository.delete(product);
     }
 }

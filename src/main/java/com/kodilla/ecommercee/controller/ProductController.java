@@ -35,7 +35,7 @@ public class ProductController {
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
         Product product = productMapper.mapToProduct(productDto);
         productService.saveProduct(product);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(productMapper.mapToProductDto(product));
     }
 
     @PutMapping
@@ -48,6 +48,6 @@ public class ProductController {
     @DeleteMapping(value = "/{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
         productService.deleteProductById(productId);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().build();
     }
 }

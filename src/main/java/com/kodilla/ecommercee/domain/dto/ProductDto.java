@@ -12,4 +12,5 @@ public class ProductDto {
     private String description;
     private Double price;
     private Long groupId;
+
 }

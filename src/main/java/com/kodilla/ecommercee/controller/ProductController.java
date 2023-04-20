@@ -7,6 +7,7 @@ import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductDbService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,14 +32,14 @@ public class ProductController {
         return ResponseEntity.ok(productMapper.mapToProductDto(productService.getProductById(productId)));
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
         Product product = productMapper.mapToProduct(productDto);
         productService.saveProduct(product);
         return ResponseEntity.ok(productMapper.mapToProductDto(product));
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
         Product product = productMapper.mapToProduct(productDto);
         Product savedProduct = productService.saveProduct(product);

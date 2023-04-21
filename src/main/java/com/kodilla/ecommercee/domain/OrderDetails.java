@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "ORDER_DETAILS")
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetails {

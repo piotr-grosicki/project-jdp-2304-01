@@ -23,7 +23,7 @@ public class CartDbService {
     private final CartRepository repository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final OrderDetailsRepository orderDetailsRepository;
+    private final OrderDetailsDbService orderDetailsDbService;
 
 
     public Cart createCart(Long userId) throws UserNotFoundException {
@@ -53,22 +53,6 @@ public class CartDbService {
     }
 
     public OrderDetails createOrder(Long cartId) throws CartNotFoundException {
-        Cart foundCart = repository.findById(cartId).orElseThrow(CartNotFoundException::new);
-
-        OrderDetails orderDetails = new OrderDetails(
-                calculateTotalPrice(foundCart),
-                foundCart,
-                foundCart.getUser()
-        );
-        orderDetailsRepository.save(orderDetails);
-        return orderDetails;
+        return orderDetailsDbService.createOrderDetails(cartId);
     }
-
-    private BigDecimal calculateTotalPrice(Cart cart) {
-
-        return BigDecimal.valueOf(cart.getProductList().stream()
-                .map(Product::getPrice)
-                .reduce(0.0, Double::sum));
-    }
-
 }

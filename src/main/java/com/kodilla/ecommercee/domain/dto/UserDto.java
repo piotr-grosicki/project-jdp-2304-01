@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -24,4 +26,6 @@ public class UserDto {
     private boolean status;
     @JsonProperty("activationKey")
     private long activationKey;
+    @JsonProperty("activationKeyExpiration")
+    private LocalDateTime activationKeyExpiration;
 }

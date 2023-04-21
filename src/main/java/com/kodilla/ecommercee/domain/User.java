@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class User {
     @Column(name = "activationKey")
     private long activationKey;
 
+    @Column(name = "activationKeyExpiration")
+    private LocalDateTime activationKeyExpiration;
 
     @OneToMany(
             targetEntity = OrderDetails.class,

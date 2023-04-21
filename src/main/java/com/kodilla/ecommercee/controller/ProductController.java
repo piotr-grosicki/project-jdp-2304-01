@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.controller.exceptions.ProductGroupNotFoundException;
 import com.kodilla.ecommercee.controller.exceptions.ProductNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductDbService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,15 +32,15 @@ public class ProductController {
         return ResponseEntity.ok(productMapper.mapToProductDto(productService.getProductById(productId)));
     }
 
-    @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
         Product product = productMapper.mapToProduct(productDto);
         productService.saveProduct(product);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(productMapper.mapToProductDto(product));
     }
 
-    @PutMapping
-    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) {
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductDto> updateProduct(@RequestBody ProductDto productDto) throws ProductGroupNotFoundException {
         Product product = productMapper.mapToProduct(productDto);
         Product savedProduct = productService.saveProduct(product);
         return ResponseEntity.ok(productMapper.mapToProductDto(savedProduct));
@@ -46,11 +48,7 @@ public class ProductController {
 
     @DeleteMapping(value = "{productId}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) throws ProductNotFoundException {
-        if (!(productService.getProductById(productId).toString().isEmpty())) {
-            productService.removeProduct(productId);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        productService.deleteProductById(productId);
+        return ResponseEntity.ok().build();
     }
 }

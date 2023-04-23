@@ -50,6 +50,7 @@ public class UserController {
     public ResponseEntity<UserDto> blockUser(@PathVariable("id") final Long id) throws UserNotFoundException {
         User user = userDbService.getUser(id).orElseThrow(UserNotFoundException::new);
         user.setStatus(false);
+        User savedUser = userDbService.saveUser(user);
         UserDto userDto = userMapper.mapToUserDto(user);
         return ResponseEntity.ok().body(userDto);
     }

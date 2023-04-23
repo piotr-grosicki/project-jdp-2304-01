@@ -53,5 +53,7 @@ public class UserDbService {
         return userRepository.findByActivationKeyAndActivationKeyExpirationAfter(activationKey, LocalDateTime.now());
     }
 
-
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }

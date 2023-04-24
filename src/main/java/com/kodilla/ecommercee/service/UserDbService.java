@@ -20,28 +20,25 @@ public class UserDbService {
         return userRepository.save(user);
     }
 
-    public User generateActivationKey(final UserDto userDto) throws UserNotFoundException {
-        User user = userRepository.findById(userDto.getId()).orElseThrow(UserNotFoundException::new);
-        if (!user.getLogin().equals(userDto.getLogin())) {
+    public User generateActivationKey(final User user) throws UserNotFoundException {
+        User generatesUser = userRepository.findById(user.getId()).orElseThrow(UserNotFoundException::new);
+        if (!generatesUser.getLogin().equals(user.getLogin())) {
             throw new UserNotFoundException();
         }
+
         LocalDateTime activationTime = LocalDateTime.now().plusHours(1);
         UUID activationKey = UUID.randomUUID();
-        user.setActivationKey(activationKey);
-        user.setActivationKeyExpiration(activationTime);
-        userRepository.save(user);
+        generatesUser.setActivationKey(activationKey);
+        generatesUser.setActivationKeyExpiration(activationTime);
 
-        return user;
+        return userRepository.save(generatesUser);
     }
 
     public User blockUser(Long userId) throws UserNotFoundException {
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        if (user != null) {
-            user.setBlocked(true);
-            user.setActivationKey(null);
-            user.setActivationKeyExpiration(null);
-            userRepository.save(user);
-        }
-        return user;
+        user.setBlocked(true);
+        user.setActivationKey(null);
+        user.setActivationKeyExpiration(null);
+        return userRepository.save(user);
     }
 }

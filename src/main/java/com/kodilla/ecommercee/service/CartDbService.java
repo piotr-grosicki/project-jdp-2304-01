@@ -8,13 +8,10 @@ import com.kodilla.ecommercee.domain.OrderDetails;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.User;
 import com.kodilla.ecommercee.repository.CartRepository;
-import com.kodilla.ecommercee.repository.OrderDetailsRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor

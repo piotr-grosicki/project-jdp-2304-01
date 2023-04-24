@@ -92,6 +92,7 @@ public class UserRepositoryTests {
         user.getOrders().add(orderDetails2);
 
         //Then
+        assertTrue(userRepository.findById(user.getId()).isPresent());
         assertEquals(2,userRepository.findById(user.getId()).get().getOrders().size());
 
         //Clean up

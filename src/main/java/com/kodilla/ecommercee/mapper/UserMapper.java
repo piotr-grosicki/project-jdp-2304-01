@@ -8,24 +8,23 @@ import org.springframework.stereotype.Service;
 public class UserMapper {
 
     public User mapToUser(UserDto userDto) {
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setBlocked(userDto.isBlocked());
-        user.setActivationKey(userDto.getActivationKey());
-        user.setLogin(userDto.getLogin());
-        return user;
+        return new User(
+                userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getLogin(),
+                userDto.isBlocked()
+        );
     }
 
     public UserDto mapToUserDto(User user) {
-        UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setBlocked(user.isBlocked());
-        userDto.setActivationKey(user.getActivationKey());
-        userDto.setLogin(user.getLogin());
-        return userDto;
+        return new UserDto(
+                user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.isBlocked(),
+                user.getActivationKey(),
+                user.getLogin()
+        );
     }
 }

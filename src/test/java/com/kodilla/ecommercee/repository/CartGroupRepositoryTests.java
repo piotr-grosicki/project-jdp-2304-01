@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CartGroupRepositoryTestSuite {
+public class CartGroupRepositoryTests {
 
     @Autowired
     private CartRepository cartGroupRepository;

@@ -10,8 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/v1/shop/users")
 @RequiredArgsConstructor
@@ -35,7 +33,7 @@ public class UserController {
 
     @PutMapping("generateKey")
     public ResponseEntity<UserDto> generateUserActivationKey(@RequestBody UserDto userDto) throws UserNotFoundException {
-        User user = userDbService.generateActivationKey(userDto);
+        User user = userDbService.generateActivationKey(userMapper.mapToUser(userDto));
         User savedUser = userDbService.saveUser(user);
         return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }

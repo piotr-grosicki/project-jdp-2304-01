@@ -49,7 +49,7 @@ public class ProductGroupRepositoryTests {
         //When
         productGroupRepository.save(productGroup1);
         productGroupRepository.save(productGroup2);
-        List<ProductGroup> productGroupList = (List<ProductGroup>) productGroupRepository.findAll();
+        List<ProductGroup> productGroupList = productGroupRepository.findAll();
 
         //Then
         assertEquals(2, productGroupList.size());

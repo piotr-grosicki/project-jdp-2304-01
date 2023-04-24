@@ -13,7 +13,7 @@ using specific endpoints as seen below.
 ### Endpoint description
 The list below contains all available application endpoints. For further 
 details navigate to swagger documentation here: 
-[http://localhost:8080/swagger-ui.html]().
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 
 - Products
   - list all products
@@ -45,7 +45,7 @@ details navigate to swagger documentation here:
 
 ### Credits
 This project was created by four developers:
-- @jak-hry
-- @RobiBobii
-- @Mateusz-Surmac
-- @QxaM
+- [jak-hry](https://github.com/jak-hry)
+- [RobiBobii](https://github.com/RobiBobii)
+- [Mateusz-Surmac](https://github.com/Mateusz-Surmac)
+- [QxaM](https://github.com/QxaM)

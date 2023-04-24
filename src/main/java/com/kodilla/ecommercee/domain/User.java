@@ -29,6 +29,9 @@ public class User {
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
+    @Column(name = "LOGIN", nullable = false)
+    private String login;
+
     @Column(name = "IS_BLOCKED", nullable = false)
     private boolean isBlocked;
 

@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.controller.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.dto.UserDto;
 import com.kodilla.ecommercee.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ public class UserDbService {
         return userRepository.save(user);
     }
 
-    public User generateActivationKey(final Long userId) throws UserNotFoundException {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        if (user != null) {
+    public User generateActivationKey(final UserDto userDto) throws UserNotFoundException {
+        User user = userRepository.findById(userDto.getId()).orElseThrow(UserNotFoundException::new);
+        if (user.getLogin().equals(userDto.getLogin())) {
             LocalDateTime activationTime = LocalDateTime.now().plusHours(1);
             UUID activationKey = UUID.randomUUID();
             user.setActivationKey(activationKey);

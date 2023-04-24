@@ -15,4 +15,5 @@ public class UserDto {
     private String lastName;
     private boolean isBlocked;
     private UUID activationKey;
+    private String login;
 }

@@ -14,6 +14,7 @@ public class UserMapper {
         user.setLastName(userDto.getLastName());
         user.setBlocked(userDto.isBlocked());
         user.setActivationKey(userDto.getActivationKey());
+        user.setLogin(userDto.getLogin());
         return user;
     }
 
@@ -24,6 +25,7 @@ public class UserMapper {
         userDto.setLastName(user.getLastName());
         userDto.setBlocked(user.isBlocked());
         userDto.setActivationKey(user.getActivationKey());
+        userDto.setLogin(user.getLogin());
         return userDto;
     }
 }

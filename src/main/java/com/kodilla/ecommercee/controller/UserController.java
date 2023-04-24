@@ -33,9 +33,9 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapToUserDto(user));
     }
 
-    @PutMapping("key/{userId}")
-    public ResponseEntity<UserDto> generateUserActivationKey(@PathVariable Long userId) throws UserNotFoundException {
-        User user = userDbService.generateActivationKey(userId);
+    @PutMapping("generateKey")
+    public ResponseEntity<UserDto> generateUserActivationKey(@RequestBody UserDto userDto) throws UserNotFoundException {
+        User user = userDbService.generateActivationKey(userDto);
         User savedUser = userDbService.saveUser(user);
         return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }

@@ -30,7 +30,7 @@ public class CartGroupRepositoryTestSuite {
     public void testCreateCart() {
 
         //Given
-        User user = new User("John", "Smith", false, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         Cart cart = new Cart(user, Arrays.asList(product1, product2));
@@ -55,7 +55,7 @@ public class CartGroupRepositoryTestSuite {
     public void testGetAllCarts() {
 
         //Given
-        User user = new User("John", "Smith", false, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         Product product3 = new Product();
@@ -82,7 +82,7 @@ public class CartGroupRepositoryTestSuite {
     public void testDeleteCart() {
 
         //Given
-        User user = new User("John", "Smith", false, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         Cart cart = new Cart(user, Arrays.asList(product1, product2));
@@ -106,7 +106,7 @@ public class CartGroupRepositoryTestSuite {
     public void testAddProductToCart() {
 
         //Given
-        User user = new User("John", "Smith", false, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         List<Product> productList = new ArrayList<>();
@@ -139,7 +139,7 @@ public class CartGroupRepositoryTestSuite {
     public void testRemoveProductFromCart() {
 
         //Given
-        User user = new User("John", "Smith", false, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         List<Product> productList = new ArrayList<>();

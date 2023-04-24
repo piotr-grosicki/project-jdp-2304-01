@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
-
 }

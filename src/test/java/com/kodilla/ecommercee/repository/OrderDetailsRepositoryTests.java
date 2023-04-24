@@ -34,7 +34,7 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testSaveOrderDetails() {
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart = new Cart();
         OrderDetails orderDetails = new OrderDetails(BigDecimal.ONE,cart, user);
 
@@ -45,7 +45,7 @@ public class OrderDetailsRepositoryTests {
 
         //Then
         assertTrue(orderDetailsRepository.findById(orderDetails.getId()).isPresent());
-        assertTrue(orderDetailsRepository.findById(orderDetails.getId()).get().getUser().isStatus());
+        assertTrue(orderDetailsRepository.findById(orderDetails.getId()).get().getUser().isBlocked());
 
         //Clean up
         userRepository.deleteAll();
@@ -56,7 +56,7 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testDownloadElementsFromCart() {
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Product product1 = new Product();
         Product product2 = new Product();
         List<Product> productList = new ArrayList<>();
@@ -86,11 +86,11 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testDeleteOrderDetails() {
         //Given
-        User user1 = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user1 = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart1 = new Cart();
         OrderDetails orderDetails1 = new OrderDetails(BigDecimal.ONE, cart1, user1);
 
-        User user2 = new User("Test - firstName", "Test - lastName", false, 1L);
+        User user2 = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart2 = new Cart();
         OrderDetails orderDetails2 = new OrderDetails(BigDecimal.TEN, cart2 ,user2);
 
@@ -118,7 +118,7 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testIfOrderDetailsIsRemoved() {
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart = new Cart();
         OrderDetails orderDetails = new OrderDetails(BigDecimal.ONE,cart, user);
 
@@ -141,7 +141,7 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testIfCartIsRemoved() {
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart = new Cart();
         OrderDetails orderDetails = new OrderDetails(BigDecimal.ONE,cart, user);
 
@@ -164,7 +164,7 @@ public class OrderDetailsRepositoryTests {
     @Test
     public void testIfUserIsRemoved(){
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         Cart cart = new Cart();
         OrderDetails orderDetails = new OrderDetails(BigDecimal.ONE,cart, user);
 

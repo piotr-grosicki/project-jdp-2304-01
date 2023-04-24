@@ -1,35 +1,42 @@
 package com.kodilla.ecommercee.controller.exceptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(ProductGroupNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleProductGroupNotFoundException(ProductGroupNotFoundException exception) {
-        return ResponseEntity.badRequest().body("Group with given id does not exist");
+        return new ResponseEntity<>("Group with given id does not exist", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception) {
-        return ResponseEntity.badRequest().body("User with given id does not exist");
+        return new ResponseEntity<>("User with given id does not exist", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(ProductNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleProductNotFoundException(ProductNotFoundException exception) {
-        return ResponseEntity.badRequest().body("Product with given id does not exist");
+        return new ResponseEntity<>("Product with given id does not exist", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(CartNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleCartNotFoundException(CartNotFoundException exception) {
-        return ResponseEntity.badRequest().body("Cart with given id does not exist");
+        return new ResponseEntity<>("Cart with given id does not exist", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(OrderDetailsNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleOrderDetailsNotFoundException(OrderDetailsNotFoundException exception) {
-        return ResponseEntity.badRequest().body("Order with given id does not exist");
+        return new ResponseEntity<>("Order with given id does not exist", HttpStatus.NOT_FOUND);
     }
 }

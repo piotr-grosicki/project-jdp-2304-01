@@ -52,9 +52,10 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String firstName, String lastName, boolean isBlocked) {
+    public User(String firstName, String lastName, String login, boolean isBlocked) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.login = login;
         this.isBlocked = isBlocked;
         this.orders = new ArrayList<>();
     }

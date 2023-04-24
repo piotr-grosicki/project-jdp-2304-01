@@ -22,13 +22,15 @@ public class UserDbService {
 
     public User generateActivationKey(final UserDto userDto) throws UserNotFoundException {
         User user = userRepository.findById(userDto.getId()).orElseThrow(UserNotFoundException::new);
-        if (user.getLogin().equals(userDto.getLogin())) {
-            LocalDateTime activationTime = LocalDateTime.now().plusHours(1);
-            UUID activationKey = UUID.randomUUID();
-            user.setActivationKey(activationKey);
-            user.setActivationKeyExpiration(activationTime);
-            return userRepository.save(user);
+        if (!user.getLogin().equals(userDto.getLogin())) {
+            throw new UserNotFoundException();
         }
+        LocalDateTime activationTime = LocalDateTime.now().plusHours(1);
+        UUID activationKey = UUID.randomUUID();
+        user.setActivationKey(activationKey);
+        user.setActivationKeyExpiration(activationTime);
+        userRepository.save(user);
+
         return user;
     }
 

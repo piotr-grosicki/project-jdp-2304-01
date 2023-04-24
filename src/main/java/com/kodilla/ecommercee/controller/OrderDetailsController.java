@@ -28,7 +28,7 @@ public class OrderDetailsController {
         return ResponseEntity.ok(orderDetailsMapper.mapToOrderDetailsDtoList(orderDetailsList));
     }
 
-    @PostMapping(value = "createOrderDetails/{cartId}")
+    @PostMapping(value = "createOrder/{cartId}")
     public ResponseEntity<OrderDetailsDto> createOrderDetails(@PathVariable Long cartId) throws CartNotFoundException {
         return ResponseEntity.ok(orderDetailsMapper.mapToOrderDetailsDto(orderDetailsDbService.createOrderDetails(cartId)));
     }

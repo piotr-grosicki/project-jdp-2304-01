@@ -3,9 +3,7 @@ package com.kodilla.ecommercee.mapper;
 import com.kodilla.ecommercee.controller.exceptions.ProductGroupNotFoundException;
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
-import com.kodilla.ecommercee.domain.dto.ProductGroupDto;
 import com.kodilla.ecommercee.repository.ProductGroupRepository;
-import com.kodilla.ecommercee.service.ProductDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

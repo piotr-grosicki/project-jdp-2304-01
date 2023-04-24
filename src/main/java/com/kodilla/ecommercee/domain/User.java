@@ -59,4 +59,12 @@ public class User {
         this.isBlocked = isBlocked;
         this.orders = new ArrayList<>();
     }
+
+    public User(Long id, String firstName, String lastName, String login, boolean isBlocked) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.isBlocked = isBlocked;
+    }
 }

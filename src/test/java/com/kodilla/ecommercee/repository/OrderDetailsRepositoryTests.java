@@ -73,6 +73,7 @@ public class OrderDetailsRepositoryTests {
         orderDetailsRepository.save(orderDetails);
 
         //Then
+        assertTrue(orderDetailsRepository.findById(orderDetails.getId()).isPresent());
         assertEquals(2,orderDetailsRepository.findById(orderDetails.getId()).get().getCart().getProductList().size());
 
         //Clean up

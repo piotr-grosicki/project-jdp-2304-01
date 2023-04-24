@@ -27,4 +27,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleCartNotFoundException(CartNotFoundException exception) {
         return ResponseEntity.badRequest().body("Cart with given id does not exist");
     }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleOrderDetailsNotFoundException(OrderDetailsNotFoundException exception) {
+        return ResponseEntity.badRequest().body("Order with given id does not exist");
+    }
 }

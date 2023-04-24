@@ -27,7 +27,7 @@ public class UserRepositoryTests {
     @Test
     public void testSaveUser(){
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
 
         //When
         userRepository.save(user);
@@ -42,8 +42,8 @@ public class UserRepositoryTests {
     @Test
     public void testFindAllUsers(){
         //Given
-        User user1 = new User("Test - firstName1", "Test - lastName1", true, 1L);
-        User user2 = new User("Test - firstName2", "Test - lastName2", false, 2L);
+        User user1 = new User("Test - firstName", "Test - lastName", "Test - login", true);
+        User user2 = new User("Test - firstName", "Test - lastName", "Test - login", false);
 
         //When
         userRepository.save(user1);
@@ -59,8 +59,8 @@ public class UserRepositoryTests {
     @Test
     public void testDeleteUser(){
         //Given
-        User user1 = new User("Test - firstName1", "Test - lastName1", true, 1L);
-        User user2 = new User("Test - firstName2", "Test - lastName2", false, 2L);
+        User user1 = new User("Test - firstName", "Test - lastName", "Test - login", true);
+        User user2 = new User("Test - firstName", "Test - lastName", "Test - login", false);
 
         //When
         userRepository.save(user1);
@@ -79,7 +79,7 @@ public class UserRepositoryTests {
     @Test
     public void testAddOrderDetailsToUser(){
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         OrderDetails orderDetails1 = new OrderDetails();
         OrderDetails orderDetails2 = new OrderDetails();
 
@@ -102,7 +102,7 @@ public class UserRepositoryTests {
     @Test
     public void testIfOrderDetailsIsRemoved(){
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         OrderDetails orderDetails = new OrderDetails();
 
         //When
@@ -122,7 +122,7 @@ public class UserRepositoryTests {
     @Test
     public void testIfUserIsRemoved(){
         //Given
-        User user = new User("Test - firstName", "Test - lastName", true, 1L);
+        User user = new User("Test - firstName", "Test - lastName", "Test - login", true);
         OrderDetails orderDetails = new OrderDetails();
 
         //When
